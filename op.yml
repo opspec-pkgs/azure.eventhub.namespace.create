@@ -1,5 +1,5 @@
-name: github.com/opspec-pkgs/azure.eventhubnamespace.create
-description: creates an azure event hub namespace (if doesn't already exist)
+name: github.com/opspec-pkgs/azure.eventhub.namespace.create
+description: creates an azure event hub namespace (if it doesn't already exist)
 inputs:
   subscriptionId:
     string:
