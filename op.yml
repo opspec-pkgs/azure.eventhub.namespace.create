@@ -5,14 +5,14 @@ inputs:
     string:
       constraints: { minLength: 1 }
       description: id of azure subscription
-  azureUsername:
-    string:
-      constraints: { format: email }
-      description: email address of azure account
-  azurePassword:
+  loginId:
     string:
       constraints: { minLength: 1 }
-      description: password of azure account
+      description: id of user, service principal, or app to login with
+  loginSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: secret of user, service principal, or app to login with
       isSecret: true
   name:
     string:
@@ -37,23 +37,35 @@ inputs:
       constraints: { minimum: 1, maximum: 20 }
       description: the throughput units, 1-20
       default: 1
+  loginTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id of user, service principal, or app to login with
+      default: " "
+  loginType:
+    string:
+      constraints: { enum: [user, sp]}
+      description: type of login; 'user' (default) or 'sp' for service principal
+      default: user
   template:
     file:
       default: /template.json
 run:
   serial:
     - container:
-        image: { ref: 'alpine' }
+        image: { ref: 'opspecpkgs/azure.eventhub.namespace.create:1.0.0' }
         cmd: [ /cmd.sh ]
         files: { /cmd.sh, /parametersTemplate.json, /parameters.json: parameters }
         envVars: { name, location, sku, messagingUnits }
     - op:
-        pkg: { ref: github.com/opspec-pkgs/azure.group.deployment.create#0.0.2 }
+        pkg: { ref: github.com/opspec-pkgs/azure.group.deployment.create#1.0.0 }
         inputs: 
           subscriptionId:
-          username: azureUsername
-          password: azurePassword
+          loginId:
+          loginSecret:
           resourceGroup:
           name:
           parameters:
           template:
+          loginTenantId:
+          loginType:
