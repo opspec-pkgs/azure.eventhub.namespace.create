@@ -47,25 +47,20 @@ inputs:
       constraints: { enum: [user, sp]}
       description: type of login; 'user' (default) or 'sp' for service principal
       default: user
-  template:
-    file:
-      default: /template.json
+version: 2.0.0
 run:
-  serial:
-    - container:
-        image: { ref: 'opspecpkgs/azure.eventhub.namespace.create:1.0.0' }
-        cmd: [ /cmd.sh ]
-        files: { /cmd.sh, /parametersTemplate.json, /parameters.json: parameters }
-        envVars: { name, location, sku, messagingUnits }
-    - op:
-        pkg: { ref: github.com/opspec-pkgs/azure.group.deployment.create#1.0.0 }
-        inputs: 
-          subscriptionId:
-          loginId:
-          loginSecret:
-          resourceGroup:
-          name:
-          parameters:
-          template:
-          loginTenantId:
-          loginType:
+  container:
+    image: { ref: 'opspecpkgs/azure.eventhub.namespace.create:2.0.0' }
+    cmd: [node, /index.js]
+    files: { /index.js }
+    envVars:
+      subscriptionId:
+      loginId:
+      loginSecret:
+      loginTenantId:
+      name:
+      resourceGroup:
+      location:
+      loginType:
+      messagingUnits:
+      sku:
