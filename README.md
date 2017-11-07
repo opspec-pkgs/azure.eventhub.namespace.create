@@ -12,20 +12,20 @@ creates an azure event hub namespace (if it doesn't already exist)
 ## install
 
 ```shell
-opctl pkg install github.com/opspec-pkgs/azure.eventhub.namespace.create#VERSION
+opctl pkg install github.com/opspec-pkgs/azure.eventhub.namespace.create#2.0.1
 ```
 
 ## run
 
 ```
-opctl run github.com/opspec-pkgs/azure.eventhub.namespace.create#VERSION
+opctl run github.com/opspec-pkgs/azure.eventhub.namespace.create#2.0.1
 ```
 
 ## compose
 
 ```yaml
 op:
-  pkg: { ref: github.com/opspec-pkgs/azure.eventhub.namespace.create#VERSION }
+  pkg: { ref: github.com/opspec-pkgs/azure.eventhub.namespace.create#2.0.1 }
   inputs: 
     subscriptionId:
     loginId:
