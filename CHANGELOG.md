@@ -5,6 +5,10 @@ All notable changes will be documented in this file in accordance with
 
 ## \[Unreleased]
 
+## \[2.0.1] - 2017-11-07
+
+fixed login when using service principal
+
 ## \[2.0.0] - 2017-07-07
 
 ## \[1.0.0] - 2017-06-15
